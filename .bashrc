@@ -1,26 +1,47 @@
 #! /bin/bash
 
-#export LC_CTYPE=en_US.UTF-8
-
-#export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/lib/python2.7/site-packages:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-
-#if [ -f `brew --prefix`/etc/bash_completion ]; then
-#    . `brew --prefix`/etc/bash_completion
-#fi
-
-#AVR Crosspack
-#export PATH=$PATH:/usr/local/CrossPack-AVR/bin
-
-# Python
-#export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/usr/local/Cellar/scons/2.1.0/lib/scons
-
-#export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not available
-
+export LC_CTYPE=en_US.UTF-8
 export HISTIGNORE="&:ls:la:clear:exit:c" 
 
-export SLOTS=/sys/devices/bone_capemgr.9/slots 
-export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
-export DEBUG_PINS=/sys/kernel/debug/gpio
+
+# LINUX - should be beaglebone specific
+if [[ "$OSTYPE" == "linux"* ]]; then
+    export SLOTS=/sys/devices/bone_capemgr.9/slots 
+    export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
+    export DEBUG_PINS=/sys/kernel/debug/gpio
+    export LD_LIBRARY_PATH=/usr/local/lib:/usr/xenomai/lib
+
+    export EDITOR=nano
+
+# OSX
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/lib/python2.7/site-packages:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+    
+    # CrossPack
+    if [ -d /usr/local/CrossPack-AVR ]; then
+	export PATH=/usr/local/CrossPack-AVR/bin:$PATH
+	export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
+    fi
+
+    # Brew
+    export PATH=/usr/local/bin:$PATH
+    if [ 'command -v brew' ]; then
+	export PATH=/usr/local/share/python:/usr/local/sbin:$PATH
+	
+	if [ -f `brew --prefix`/etc/bash_completion ]; then
+	    . `brew --prefix`/etc/bash_completion
+	fi
+    fi    
+
+# Python
+    export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+
+    export WORKON_HOME="~/.virtualenvs"
+    source /usr/local/share/python/virtualenvwrapper.sh
+
+    export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not available
+fi
+
 
 alias ..="cd .."
 alias ~="cd ~"
