@@ -1,0 +1,19 @@
+# key bindings
+bind c screen 1
+#bind 0 select 10
+screen    -t 'bash' 1 
+
+
+escape ^]]
+
+startup_message off
+vbell off
+
+defscrollback 100000
+
+#allow mouse scolling
+#termcapinfo xterm* ti@:te@
+
+# status bar
+hardstatus on
+hardstatus alwayslastline "%{+ WK} %H [%l] %= %-w%{- CK}%n %t%{-}%+w %-="

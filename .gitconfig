@@ -1,0 +1,14 @@
+[user]
+	name = Vincent de Belleval
+	email = 2000db@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+[gist]
+	browse = yes
+	private = no
