@@ -1,3 +1,5 @@
+[apply]
+	whitespace = fix
 [user]
 	name = Vincent de Belleval
 	email = 2000db@gmail.com
@@ -9,6 +11,7 @@
 	ci = commit
 	co = checkout
 	st = status
+	lg = log --oneline --decorate
 [gist]
 	browse = yes
 	private = no
