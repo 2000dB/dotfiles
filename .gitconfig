@@ -15,3 +15,6 @@
 [gist]
 	browse = yes
 	private = no
+[core]
+	excludefile = /Users/vdb/.gitignore
+	excludesfile = /Users/vdb/.gitignore
