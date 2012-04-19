@@ -1,0 +1,4 @@
+--color
+
+--type-add=arduino=.ino
+--type-add=arduino=.pde
