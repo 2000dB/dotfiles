@@ -2,11 +2,15 @@
 
 export LC_CTYPE=en_US.UTF-8
 
-export HISTIGNORE="&:ls:clear:exit:c"
+export HISTIGNORE="&:ls:la:clear:exit:c"
 
 export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/lib/python2.7/site-packages:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
-#AVR CROSSPACK
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+#AVR Crosspack
 export PATH=$PATH:/usr/local/CrossPack-AVR/bin
 
 # Python
@@ -16,19 +20,35 @@ export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not avai
 
 alias ..="cd .."
 alias ~="cd ~"
-alias ls="ls -laG"
+alias p="cd ~/Documents/Projects/"
+alias ls="ls -hlG"
+alias la="ls -ahlG"
 alias grep="grep --color"
 alias c="clear"
-alias l="ls -laG"
 alias e="emacs -nw"
 alias emacs="emacs -nw"
 alias ec="emacsclient -n"
 
-# Define colors
-cyan='\[\033[0;36m\]'
-WHITE='\[\033[1;37m\]'
-NC='\[\033[0m\]'
+# COLORS
+cyan='\033[0;36m\'
+WHITE='\033[1;37m'
+RED='\033[1;31m'
+PURP='\033[0;35m'
+NC='\033[0m'
 
-# Prompt
-PS1="$cyan[\W] $WHITE> $NC"
+function parse_git_dirty() {
+    if [ -d .git ]; then
+	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    fi
+    }
 
+function parse_git_branch() {
+    if [ -d .git ]; then
+	echo -e $PURP"["$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")$RED$(parse_git_dirty)$PURP"]"
+    else
+	echo ""
+    fi
+}
+
+# PROMPT
+export PS1="$cyan[[\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
