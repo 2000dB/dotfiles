@@ -31,9 +31,9 @@ alias ec="emacsclient -n"
 
 # COLORS
 cyan='\033[0;36m\'
+purp='\033[0;35m'
 WHITE='\033[1;37m'
-RED='\033[1;31m'
-PURP='\033[0;35m'
+YELLOW='\033[1;33m'
 NC='\033[0m'
 
 function parse_git_dirty() {
@@ -44,10 +44,10 @@ function parse_git_dirty() {
 
 function parse_git_branch() {
     if [ -d .git ]; then
-	echo -e $PURP"["$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")$RED$(parse_git_dirty)$PURP"]"
+	echo -e $purp"["$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")$YELLOW$(parse_git_dirty)$purp"]"
     else
 	echo ""
-    fi
+}    fi
 }
 
 # PROMPT
