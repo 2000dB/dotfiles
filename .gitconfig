@@ -18,3 +18,7 @@
 [core]
 	excludefile = /Users/vdb/.gitignore
 	excludesfile = /Users/vdb/.gitignore
+	editor = nano
+	pager = less
+[push]
+	default = matching
