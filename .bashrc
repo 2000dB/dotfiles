@@ -16,18 +16,22 @@
 
 #export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not available
 
-export HISTIGNORE="&:ls:la:clear:exit:c"
+export HISTIGNORE="&:ls:la:clear:exit:c" 
+
+export SLOTS=/sys/devices/bone_capemgr.9/slots 
+export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
+export DEBUG_PINS=/sys/kernel/debug/gpio
 
 alias ..="cd .."
 alias ~="cd ~"
-alias p="cd ~/Documents/Projects/"
-alias ls="ls -hlG"
-alias la="ls -ahlG"
+#alias p="cd ~/Documents/Projects/"
+alias ls="ls -hlG --color"
+alias la="ls -ahlG --color"
 alias grep="grep --color"
 alias c="clear"
-alias e="emacs -nw"
-alias emacs="emacs -nw"
-alias ec="emacsclient -n"
+#alias e="emacs -nw"
+#alias emacs="emacs -nw"
+#alias ec="emacsclient -n"
 
 # COLORS
 cyan='\033[0;36m'
