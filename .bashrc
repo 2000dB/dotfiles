@@ -6,6 +6,13 @@ export LC_CTYPE=en_US.UTF-8
 export HISTIGNORE="&:ls:la:clear:exit:c:[*"
 
 
+SSHAGENT=/usr/bin/ssh-agent
+SSHAGENTARGS="-s"
+if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+    eval `$SSHAGENT $SSHAGENTARGS`
+    trap "kill $SSH_AGENT_PID" 0
+fi
+
 ######## COLORS ########
 cyan='\033[0;36m\'
 cyan='\033[0;36m'
