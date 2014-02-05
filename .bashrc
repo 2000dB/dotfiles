@@ -2,9 +2,7 @@
 
 export LC_CTYPE=en_US.UTF-8
 
-
 export HISTIGNORE="&:ls:la:clear:exit:c:[*"
-
 
 ######## COLORS ########
 cyan='\033[0;36m\'
