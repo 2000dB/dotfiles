@@ -5,6 +5,7 @@ export LC_CTYPE=en_US.UTF-8
 export HISTIGNORE="&:ls:la:clear:exit:c:[*"
 
 ######## COLORS ########
+export LSCOLORS="DxGxBxDxCxEgEdxbxgxcxd"
 cyan='\033[0;36m\'
 cyan='\033[0;36m'
 purp='\033[0;35m'
@@ -37,7 +38,9 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 
     export EDITOR=nano
 
-    export PS1="$cyan[$WHITE\H@$cyan\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+    
+
+
 
 # OSX
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -63,13 +66,28 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
     export WORKON_HOME="~/.virtualenvs"
-    source /usr/local/share/python/virtualenvwrapper.sh
+    source /usr/local/bin/virtualenvwrapper.sh
 
     export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not available
 
-    PS1="$cyan[\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+
 fi
 
+######## PROMPT ########
+case "$TERM" in
+    "dumb")
+	PS1="> "
+	;;
+    xterm*|rxvt*|eterm*|screen*)
+        PS1="$cyan[\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+	;;
+    linux*)
+        export PS1="$cyan[$WHITE\H@$cyan\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+	;;
+    *)
+	PS1="> "
+	;;
+    esac
 
 
 ######## ALIASES ########
@@ -88,9 +106,10 @@ alias la="ls -ahlG"
 alias e="emacs -nw"
 alias emacs="emacs -nw"
 alias ec="emacsclient -n"
+alias sch="gschem"
 
-alias p="cd ~/Projects/"
-alias uva="cd ~/Projects/UVA/"
+
+alias uva="cd ~/UVA/"
 
 
 # ssh wrapper that rename current tmux window to the hostname of the
