@@ -52,6 +52,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
     fi
 
+    # ARM
+    if [ -d /usr/local/arm/gcc-arm-none-eabi ]; then
+        export PATH=/usr/local/arm/gcc-arm-none-eabi/bin:$PATH
+    fi
+
     # Brew
     export PATH=/usr/local/bin:$PATH
     if [ 'command -v brew' ]; then
@@ -126,3 +131,27 @@ ssh() {
     settitle "bash"
 }
 
+
+create_repo()
+{
+    service=$1
+    repo_name=$2
+    is_private=$3
+
+    username=""
+    pass=""
+
+    
+    if [ "$service" == "--help" ]; then
+        echo "create_repo service repo_name private[true/false]"
+        exit 1
+    fi
+    
+    # deal with password
+    if [  "$service" == "github" ]; then
+        curl -s -u "2000db" https://api.github.com/user/repos -d '{"name":"'$repo_name'"}'
+    elif [ "$service" == "bitbucket" ]; then
+        curl -s -u "vincent-uva" https://api.bitbucket.org/1.0/repositories/ --data name="$repo_name" --data is_private="$is_private"
+    fi
+
+}

@@ -4,5 +4,14 @@
 *.*~
 #*
 .#
+
+#python
 .pyo
 .pyc
+
+#eagle
+*.s#*
+*.b#*
+
+# DXFs
+*.bak

@@ -22,3 +22,8 @@
 	pager = less
 [push]
 	default = matching
+[merge]
+	conflictstyle = merge
+	tool = extMerge
+[diff]
+	tool = kdiff3
