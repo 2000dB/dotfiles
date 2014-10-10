@@ -6,6 +6,7 @@ export HISTIGNORE="&:ls:la:clear:exit:c:[*"
 
 ######## COLORS ########
 export LSCOLORS="DxGxBxDxCxEgEdxbxgxcxd"
+export LS_COLORS="di=1;33"
 cyan='\033[0;36m\'
 cyan='\033[0;36m'
 purp='\033[0;35m'
@@ -38,9 +39,12 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 
     export EDITOR=nano
 
+    export PS1="$cyan[$WHITE\H@$cyan\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+
+    alias ls="ls -hl --color"
+    alias la="ls -ahl --color"
+
     
-
-
 
 # OSX
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -75,24 +79,28 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     export EDITOR="emacsclient -na vi" # Use emacsclient, fallback on vi if not available
 
+    PS1="$cyan[\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
+
+    alias ls="ls -hlG"
+    alias la="ls -ahlG"
+
 
 fi
 
 ######## PROMPT ########
-case "$TERM" in
-    "dumb")
-	PS1="> "
-	;;
-    xterm*|rxvt*|eterm*|screen*)
-        PS1="$cyan[\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
-	;;
-    linux*)
-        export PS1="$cyan[$WHITE\H@$cyan\W]$WHITE\$(parse_git_branch)$WHITE> $NC"
-	;;
-    *)
-	PS1="> "
-	;;
-    esac
+# case "$TERM" in
+#     "dumb")
+# 	PS1="> "
+# 	;;
+#     xterm*|rxvt*|eterm*|screen*)
+# 	;;
+#     linux*)
+
+# 	;;
+#     *)
+# 	PS1="> "
+# 	;;
+#     esac
 
 
 ######## ALIASES ########
@@ -101,18 +109,15 @@ case "$TERM" in
 
 alias ..="cd .."
 alias ~="cd ~"
+
 alias grep="grep --color"
 alias c="clear"
 alias ip="curl http://ip.appspot.com"
-
-alias ls="ls -hlG"
-alias la="ls -ahlG"
 
 alias e="emacs -nw"
 alias emacs="emacs -nw"
 alias ec="emacsclient -n"
 alias sch="gschem"
-
 
 alias uva="cd ~/UVA/"
 
@@ -120,7 +125,6 @@ alias uva="cd ~/UVA/"
 # ssh wrapper that rename current tmux window to the hostname of the
 # remote host.
 settitle() {
-
     printf "\033k$1\033\\"
 }
 
