@@ -69,7 +69,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
     fi    
 
-# Python
+
+
+
+    # go
+    export GOPATH=$HOME/go
+    export GOROOT="/usr/local/opt/go/libexec"
+    export PATH=$PATH:$GOPATH/bin
+    export PATH=$PATH:$GOROOT/bin
+
+    # Python
     export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
     export WORKON_HOME="~/.virtualenvs"
@@ -119,6 +128,9 @@ alias sch="gschem"
 
 alias uva="cd ~/UVA/"
 
+alias 201="ssh root@20.0.0.201"
+alias 202="ssh root@20.0.0.202"
+alias 203="ssh root@20.0.0.203"
 
 # ssh wrapper that rename current tmux window to the hostname of the
 # remote host.
